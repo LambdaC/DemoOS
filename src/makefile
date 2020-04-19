@@ -14,3 +14,18 @@ OBJS = kernel.o loader.o
 LDFLAGS = -melf_i386
 kernel.bin: linker.ld $(OBJS)
 	ld $(LDFLAGS) -T $< -o $@ $(OBJS)
+
+.PHONY: clean
+
+clean:
+	rm -f *.o *.bin 
+
+SOURCE_FILES = kernel.cpp linker.ld loader.s makefile types.h
+send: 
+	scp -r $(SOURCE_FILES) root@49.235.226.43:/root/demoOS/src/
+
+get:
+	scp root@49.235.226.43:/root/demoOS/src/kernel.bin ../bin
+
+run:
+	qemu-system-i386 -kernel ../bin/kernel.bin &
