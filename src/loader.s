@@ -13,11 +13,13 @@
 
 .section .text
 .extern kernelMain
+.extern callConstructors
 .global loader
 
 
 loader:
     mov $kernel_stack, %esp # 初始化栈空间
+    call callConstructors # 调用全局变量的构造函数
     push %eax
     push %ebx
     call kernelMain     # 调用kernel的入口函数
