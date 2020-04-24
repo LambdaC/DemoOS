@@ -49,7 +49,9 @@ extern "C" void kernelMain(const void* multiboot_structure, uint32_t /*multiboot
     while(1);   // 为了防止程序执行一些无意义的指令
 }
 
-
+/**
+ * 调用c++全局变量的构造函数
+ */
 typedef void (*constructor)();
 extern "C" constructor start_ctors;
 extern "C" constructor end_ctors;
