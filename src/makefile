@@ -14,7 +14,7 @@ ASFLAGS = --32
 	as $(ASFLAGS) -o $@ $<
 
 
-OBJS = kernel.o loader.o gdt.o
+OBJS = kernel.o loader.o gdt.o port.o
 LDFLAGS = -melf_i386 -nostdlib
 kernel.bin: linker.ld $(OBJS)
 	ld $(LDFLAGS) -T $< -o $@ $(OBJS)
@@ -24,7 +24,7 @@ kernel.bin: linker.ld $(OBJS)
 clean:
 	rm -f *.o *.bin *.exe
 
-SOURCE_FILES = kernel.cpp linker.ld loader.s makefile types.h gdt.h gdt.cpp test.cpp io.h
+SOURCE_FILES = kernel.cpp linker.ld loader.s makefile types.h gdt.h gdt.cpp test.cpp io.h port.h port.cpp
 send: 
 	scp -r $(SOURCE_FILES) root@49.235.226.43:/root/demoOS/src/
 
